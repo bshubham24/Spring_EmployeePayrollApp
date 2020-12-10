@@ -9,7 +9,7 @@ import com.capgi.employeepayrollspring.dto.EmployeePayrollDTO;
 import com.capgi.employeepayrollspring.model.EmployeePayrollData;
 
 @Service
-public class EmployeePayrollService {
+public class EmployeePayrollService implements IEmployeePayrollService {
 
 	public List<EmployeePayrollData> getEmployeePayrollData() {
 		List<EmployeePayrollData> empDataList = new ArrayList<>();
@@ -20,7 +20,7 @@ public class EmployeePayrollService {
 
 	public EmployeePayrollData getEmployeePayrollDataById(int empId) {
 		EmployeePayrollData empData = null;
-		empData = new EmployeePayrollData(1, new EmployeePayrollDTO("pankaj", 30000));
+		empData = new EmployeePayrollData(empId, new EmployeePayrollDTO("pankaj", 30000));
 		return empData;
 	}
 
