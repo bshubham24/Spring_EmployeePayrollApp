@@ -24,4 +24,9 @@ public class ResponseDTO {
 		this.message = message;
 		this.data = data;
 	}
+
+	public ResponseDTO(String string) {
+		// TODO Auto-generated constructor stub
+		this.message = string;
+	}
 }
