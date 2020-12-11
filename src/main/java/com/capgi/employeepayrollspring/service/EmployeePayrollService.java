@@ -74,11 +74,9 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 
 	@Override
 	public EmployeePayrollDB updateUserDB(long empId, EmployeePayrollDTO empPayrollDTO) {
-		EmployeePayrollDTO employeePayrollDTO = employeePayrollRepository.findById(empId)
-				.map(employeePayroll -> new EmployeePayrollDTO(employeePayroll)).orElse(null);
-		employeePayrollDTO.setName(empPayrollDTO.getName());
-		employeePayrollDTO.setSalary(empPayrollDTO.getSalary());
-		EmployeePayrollDB employeePayrollDB = new EmployeePayrollDB(employeePayrollDTO);
+		EmployeePayrollDB employeePayrollDB = employeePayrollRepository.findById(empId).get();
+		employeePayrollDB.setName(empPayrollDTO.getName());
+		employeePayrollDB.setSalary(empPayrollDTO.getSalary());
 		employeePayrollRepository.save(employeePayrollDB);
 		return employeePayrollDB;
 	}
