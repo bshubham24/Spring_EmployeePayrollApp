@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capgi.employeepayrollspring.domain.EmployeePayrollDB;
 import com.capgi.employeepayrollspring.dto.EmployeePayrollDTO;
 import com.capgi.employeepayrollspring.dto.ResponseDTO;
 import com.capgi.employeepayrollspring.model.EmployeePayrollData;
@@ -61,6 +63,45 @@ public class EmployeePayrollController {
 	@DeleteMapping("/delete/{empId}")
 	public ResponseEntity<ResponseDTO> deleteEmployeePayrollData(@PathVariable("empId") int empId) {
 		employeePayrollService.deleteEmployeePayrollData(empId);
+		ResponseDTO respDTO = new ResponseDTO("Deleted Employee Payroll Data Successfully", "Deleted id: " + empId);
+		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
+	}
+
+	@GetMapping("/sql")
+	public ResponseEntity<ResponseDTO> getEmployeePayrollDataFromDB() {
+		List<EmployeePayrollDTO> empPayrollList = null;
+		empPayrollList = employeePayrollService.getAllUserDB();
+		ResponseDTO respDTO = new ResponseDTO("Get call Success", empPayrollList);
+		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
+	}
+
+	@GetMapping("/sql/{id}")
+	public ResponseEntity<ResponseDTO> getEmployeePayrollDataByIdFromDB(@PathVariable long id) {
+		EmployeePayrollDTO empPayrollDTO = employeePayrollService.getUserByIdDB(id);
+		ResponseDTO respDTO = new ResponseDTO("Get call By id: " + id + " Success", empPayrollDTO);
+		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
+	}
+
+	@PostMapping("/sql/create")
+	public ResponseEntity<ResponseDTO> addEmployeePayrollDataDB(@RequestBody EmployeePayrollDTO employeePayrollDTO) {
+		EmployeePayrollDB employeePayrollDB = null;
+		employeePayrollDB = employeePayrollService.createUserDB(employeePayrollDTO);
+		ResponseDTO respDTO = new ResponseDTO("Created Employee Payroll Data Successfully", employeePayrollDB);
+		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
+	}
+
+	@PutMapping("/sql/update/{empId}")
+	public ResponseEntity<ResponseDTO> updateEmployeePayrollDataDB(@PathVariable("empId") int empId,
+			@RequestBody EmployeePayrollDTO employeePayrollDTO) {
+		EmployeePayrollDB employeePayrollDB = null;
+		employeePayrollDB = employeePayrollService.updateUserDB(empId, employeePayrollDTO);
+		ResponseDTO respDTO = new ResponseDTO("Updated Employee Payroll Data Successfully", employeePayrollDB);
+		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/sql/delete/{empId}")
+	public ResponseEntity<ResponseDTO> deleteEmployeePayrollDataDB(@PathVariable("empId") int empId) {
+		employeePayrollService.deleteUserDB(empId);
 		ResponseDTO respDTO = new ResponseDTO("Deleted Employee Payroll Data Successfully", "Deleted id: " + empId);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
