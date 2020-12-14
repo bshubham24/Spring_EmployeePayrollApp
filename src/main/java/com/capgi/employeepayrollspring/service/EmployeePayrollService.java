@@ -100,6 +100,9 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 			if (Objects.nonNull(empPayrollDTO.getStartDate())) {
 				employeePayrollDB.setStartDate(empPayrollDTO.getStartDate());
 			}
+			if (Objects.nonNull(empPayrollDTO.getProfilePic())) {
+				employeePayrollDB.setProfilePic(empPayrollDTO.getProfilePic());
+			}
 			if (Objects.nonNull(empPayrollDTO.getNotes())) {
 				employeePayrollDB.setNotes(empPayrollDTO.getNotes());
 			}

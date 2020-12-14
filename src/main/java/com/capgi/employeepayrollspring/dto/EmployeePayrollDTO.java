@@ -1,12 +1,13 @@
 package com.capgi.employeepayrollspring.dto;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 
 import com.capgi.employeepayrollspring.domain.EmployeePayrollDB;
@@ -27,9 +28,11 @@ public class EmployeePayrollDTO {
 	public String gender;
 	@NotEmpty(message = "Employee department cannot be null")
 	public String department;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	// @PastOrPresent(message = "StartDate should be past or todays date")
-	public Date startDate;
+	@JsonFormat(pattern = "dd MMM yyyy")
+	@PastOrPresent(message = "StartDate should be past or todays date")
+	public LocalDate startDate;
+	@NotBlank(message = "Profile Pic cannot be blank")
+	public String profilePic;
 	@NotBlank(message = "notes cannot be blank")
 	public String notes;
 
@@ -51,19 +54,19 @@ public class EmployeePayrollDTO {
 		this.gender = user.getGender();
 		this.department = user.getDepartment();
 		this.startDate = user.getStartDate();
+		this.profilePic = user.getProfilePic();
 		this.notes = user.getNotes();
 	}
 
-	final static String NAME_PATTERN = "^[A-Z]{1}[a-zA-Z]{2,}";
-
-	public EmployeePayrollDTO(String name, long salary, String gender, String department, Date startDate,
-			String notes) {
+	public EmployeePayrollDTO(String name, long salary, String gender, String department, LocalDate startDate,
+			String profilePic, String notes) {
 
 		this.name = name;
 		this.salary = salary;
 		this.gender = gender;
 		this.department = department;
 		this.startDate = startDate;
+		this.profilePic = profilePic;
 		this.notes = notes;
 
 	}
@@ -108,11 +111,11 @@ public class EmployeePayrollDTO {
 		this.department = department;
 	}
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
@@ -122,12 +125,6 @@ public class EmployeePayrollDTO {
 
 	public void setNotes(String notes) {
 		this.notes = notes;
-	}
-
-	@Override
-	public String toString() {
-		return "EmployeePayrollDTO [id=" + id + ", name=" + name + ", salary=" + salary + ", gender=" + gender
-				+ ", department=" + department + ", startDate=" + startDate + ", notes=" + notes + "]";
 	}
 
 }

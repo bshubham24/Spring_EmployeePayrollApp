@@ -1,7 +1,7 @@
 package com.capgi.employeepayrollspring.domain;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +12,9 @@ import javax.persistence.Table;
 import com.capgi.employeepayrollspring.dto.EmployeePayrollDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "emp_data")
 public class EmployeePayrollDB implements Serializable {
@@ -25,8 +28,9 @@ public class EmployeePayrollDB implements Serializable {
 	private Long salary;
 	private String gender;
 	private String department;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	private Date startDate;
+	@JsonFormat(pattern = "dd MMM yyyy")
+	private LocalDate startDate;
+	private String profilePic;
 	private String notes;
 
 	public String getGender() {
@@ -45,11 +49,11 @@ public class EmployeePayrollDB implements Serializable {
 		this.department = department;
 	}
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
@@ -89,8 +93,8 @@ public class EmployeePayrollDB implements Serializable {
 		this.salary = salary;
 	}
 
-	public EmployeePayrollDB(Long id, String name, Long salary, String gender, String department, Date startDate,
-			String notes) {
+	public EmployeePayrollDB(Long id, String name, Long salary, String gender, String department, LocalDate startDate,
+			String profilePic, String notes) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -98,6 +102,7 @@ public class EmployeePayrollDB implements Serializable {
 		this.gender = gender;
 		this.department = department;
 		this.startDate = startDate;
+		this.profilePic = profilePic;
 		this.notes = notes;
 	}
 
@@ -107,6 +112,7 @@ public class EmployeePayrollDB implements Serializable {
 		this.department = employeePayrollDTO.getDepartment();
 		this.gender = employeePayrollDTO.getGender();
 		this.startDate = employeePayrollDTO.getStartDate();
+		this.profilePic = employeePayrollDTO.getProfilePic();
 		this.notes = employeePayrollDTO.getNotes();
 	}
 
