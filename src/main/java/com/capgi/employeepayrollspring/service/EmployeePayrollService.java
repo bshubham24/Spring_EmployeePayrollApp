@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.capgi.employeepayrollspring.domain.EmployeePayrollDB;
 import com.capgi.employeepayrollspring.dto.EmployeePayrollDTO;
-import com.capgi.employeepayrollspring.exception.DataMissingException;
 import com.capgi.employeepayrollspring.exception.EmployeeNotFoundException;
 import com.capgi.employeepayrollspring.model.EmployeePayrollData;
 import com.capgi.employeepayrollspring.repository.EmployeePayrollRepository;
@@ -66,51 +65,46 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 	public EmployeePayrollDTO getUserByIdDB(long id) {
 		EmployeePayrollDTO employeePayrollDTO = employeePayrollRepository.findById(id)
 				.map(employeePayroll -> new EmployeePayrollDTO(employeePayroll)).orElse(null);
-		if (employeePayrollDTO.getName() != null) {
-			return employeePayrollDTO;
+		if (employeePayrollDTO == null) {
+			throw new EmployeeNotFoundException("Employee Not Found");
 		} else {
-			throw new EmployeeNotFoundException("Employee not found!!");
+			return employeePayrollDTO;
 		}
+
 	}
 
 	@Override
 	public EmployeePayrollDB createUserDB(EmployeePayrollDTO employeePayrollDTO) {
-		if (employeePayrollDTO.getName() != null || employeePayrollDTO.getName() != "") {
-			EmployeePayrollDB employeePayrollDB = new EmployeePayrollDB(employeePayrollDTO);
-			employeePayrollRepository.save(employeePayrollDB);
-			return employeePayrollDB;
-		}
-		throw new EmployeeNotFoundException("Data is missing");
+		EmployeePayrollDB employeePayrollDB = new EmployeePayrollDB(employeePayrollDTO);
+		employeePayrollRepository.save(employeePayrollDB);
+		return employeePayrollDB;
+
 	}
 
 	@Override
 	public EmployeePayrollDB updateUserDB(long empId, EmployeePayrollDTO empPayrollDTO) {
 		EmployeePayrollDB employeePayrollDB = employeePayrollRepository.findById(empId).get();
-		if (empPayrollDTO.getName() == null) {
-			throw new DataMissingException("Data is not present!!");
-		} else {
-			if (employeePayrollDB != null && employeePayrollDB.getId() == empId) {
-				if (Objects.nonNull(empPayrollDTO.getName())) {
-					employeePayrollDB.setName(empPayrollDTO.getName());
-				}
-				if (Objects.nonNull(empPayrollDTO.getSalary())) {
-					employeePayrollDB.setSalary(empPayrollDTO.getSalary());
-				}
-				if (Objects.nonNull(empPayrollDTO.getDepartment())) {
-					employeePayrollDB.setDepartment(empPayrollDTO.getDepartment());
-				}
-				if (Objects.nonNull(empPayrollDTO.getGender())) {
-					employeePayrollDB.setGender(empPayrollDTO.getGender());
-				}
-				if (Objects.nonNull(empPayrollDTO.getStartDate())) {
-					employeePayrollDB.setStartDate(empPayrollDTO.getStartDate());
-				}
-				if (Objects.nonNull(empPayrollDTO.getNotes())) {
-					employeePayrollDB.setNotes(empPayrollDTO.getNotes());
-				}
-				employeePayrollRepository.save(employeePayrollDB);
-				return employeePayrollDB;
+		if (employeePayrollDB != null && employeePayrollDB.getId() == empId) {
+			if (Objects.nonNull(empPayrollDTO.getName())) {
+				employeePayrollDB.setName(empPayrollDTO.getName());
 			}
+			if (Objects.nonNull(empPayrollDTO.getSalary())) {
+				employeePayrollDB.setSalary(empPayrollDTO.getSalary());
+			}
+			if (Objects.nonNull(empPayrollDTO.getDepartment())) {
+				employeePayrollDB.setDepartment(empPayrollDTO.getDepartment());
+			}
+			if (Objects.nonNull(empPayrollDTO.getGender())) {
+				employeePayrollDB.setGender(empPayrollDTO.getGender());
+			}
+			if (Objects.nonNull(empPayrollDTO.getStartDate())) {
+				employeePayrollDB.setStartDate(empPayrollDTO.getStartDate());
+			}
+			if (Objects.nonNull(empPayrollDTO.getNotes())) {
+				employeePayrollDB.setNotes(empPayrollDTO.getNotes());
+			}
+			employeePayrollRepository.save(employeePayrollDB);
+			return employeePayrollDB;
 		}
 		return null;
 

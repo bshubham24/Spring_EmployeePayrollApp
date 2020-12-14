@@ -2,6 +2,8 @@ package com.capgi.employeepayrollspring.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -83,7 +85,8 @@ public class EmployeePayrollController {
 	}
 
 	@PostMapping("/sql/create")
-	public ResponseEntity<ResponseDTO> addEmployeePayrollDataDB(@RequestBody EmployeePayrollDTO employeePayrollDTO) {
+	public ResponseEntity<ResponseDTO> addEmployeePayrollDataDB(
+			@Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
 		EmployeePayrollDB employeePayrollDB = null;
 		employeePayrollDB = employeePayrollService.createUserDB(employeePayrollDTO);
 		ResponseDTO respDTO = new ResponseDTO("Created Employee Payroll Data Successfully", employeePayrollDB);
@@ -92,7 +95,7 @@ public class EmployeePayrollController {
 
 	@PutMapping("/sql/update/{empId}")
 	public ResponseEntity<ResponseDTO> updateEmployeePayrollDataDB(@PathVariable("empId") int empId,
-			@RequestBody EmployeePayrollDTO employeePayrollDTO) {
+			@Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
 		EmployeePayrollDB employeePayrollDB = null;
 		employeePayrollDB = employeePayrollService.updateUserDB(empId, employeePayrollDTO);
 		ResponseDTO respDTO = new ResponseDTO("Updated Employee Payroll Data Successfully", employeePayrollDB);
