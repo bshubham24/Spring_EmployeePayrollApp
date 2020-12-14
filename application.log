@@ -1,0 +1,11 @@
+2020-12-14 12:48:59.594  INFO 5512 --- [restartedMain] c.c.e.EmployeePayrollSpringApplication   : Starting EmployeePayrollSpringApplication using Java 15 on DESKTOP-QLPFQS8 with PID 5512 (F:\Capgemini_training1\java_eclipse\EmployeePayrollSpring\target\classes started by acer in F:\Capgemini_training1\java_eclipse\EmployeePayrollSpring)
+2020-12-14 12:48:59.598 DEBUG 5512 --- [restartedMain] c.c.e.EmployeePayrollSpringApplication   : Running with Spring Boot v2.4.0, Spring v5.3.1
+2020-12-14 12:48:59.599  INFO 5512 --- [restartedMain] c.c.e.EmployeePayrollSpringApplication   : No active profile set, falling back to default profiles: default
+2020-12-14 12:49:11.753  WARN 5512 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-12-14 12:49:25.897  INFO 5512 --- [restartedMain] c.c.e.EmployeePayrollSpringApplication   : Started EmployeePayrollSpringApplication in 28.99 seconds (JVM running for 34.36)
+2020-12-14 12:51:48.530  INFO 3492 --- [restartedMain] c.c.e.EmployeePayrollSpringApplication   : Starting EmployeePayrollSpringApplication using Java 15 on DESKTOP-QLPFQS8 with PID 3492 (F:\Capgemini_training1\java_eclipse\EmployeePayrollSpring\target\classes started by acer in F:\Capgemini_training1\java_eclipse\EmployeePayrollSpring)
+2020-12-14 12:51:48.535 DEBUG 3492 --- [restartedMain] c.c.e.EmployeePayrollSpringApplication   : Running with Spring Boot v2.4.0, Spring v5.3.1
+2020-12-14 12:51:48.536  INFO 3492 --- [restartedMain] c.c.e.EmployeePayrollSpringApplication   : No active profile set, falling back to default profiles: default
+2020-12-14 12:51:50.163  WARN 3492 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-12-14 12:51:51.424  INFO 3492 --- [restartedMain] c.c.e.EmployeePayrollSpringApplication   : Started EmployeePayrollSpringApplication in 3.25 seconds (JVM running for 4.314)
+2020-12-14 12:51:51.427  INFO 3492 --- [restartedMain] c.c.e.EmployeePayrollSpringApplication   : Employee Payroll App Started
