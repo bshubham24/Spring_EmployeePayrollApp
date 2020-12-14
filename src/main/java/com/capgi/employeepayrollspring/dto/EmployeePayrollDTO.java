@@ -30,6 +30,8 @@ public class EmployeePayrollDTO {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	// @PastOrPresent(message = "StartDate should be past or todays date")
 	public Date startDate;
+	@NotBlank(message = "Profile Pic cannot be blank")
+	public String profilePic;
 	@NotBlank(message = "notes cannot be blank")
 	public String notes;
 
@@ -51,19 +53,21 @@ public class EmployeePayrollDTO {
 		this.gender = user.getGender();
 		this.department = user.getDepartment();
 		this.startDate = user.getStartDate();
+		this.profilePic = user.getProfilePic();
 		this.notes = user.getNotes();
 	}
 
 	final static String NAME_PATTERN = "^[A-Z]{1}[a-zA-Z]{2,}";
 
 	public EmployeePayrollDTO(String name, long salary, String gender, String department, Date startDate,
-			String notes) {
+			String profilePic, String notes) {
 
 		this.name = name;
 		this.salary = salary;
 		this.gender = gender;
 		this.department = department;
 		this.startDate = startDate;
+		this.profilePic = profilePic;
 		this.notes = notes;
 
 	}
@@ -122,12 +126,6 @@ public class EmployeePayrollDTO {
 
 	public void setNotes(String notes) {
 		this.notes = notes;
-	}
-
-	@Override
-	public String toString() {
-		return "EmployeePayrollDTO [id=" + id + ", name=" + name + ", salary=" + salary + ", gender=" + gender
-				+ ", department=" + department + ", startDate=" + startDate + ", notes=" + notes + "]";
 	}
 
 }

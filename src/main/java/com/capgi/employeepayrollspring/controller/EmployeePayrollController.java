@@ -94,7 +94,7 @@ public class EmployeePayrollController {
 	}
 
 	@PutMapping("/sql/update/{empId}")
-	public ResponseEntity<ResponseDTO> updateEmployeePayrollDataDB(@PathVariable("empId") int empId,
+	public ResponseEntity<ResponseDTO> updateEmployeePayrollDataDB(@Valid @PathVariable("empId") int empId,
 			@Valid @RequestBody EmployeePayrollDTO employeePayrollDTO) {
 		EmployeePayrollDB employeePayrollDB = null;
 		employeePayrollDB = employeePayrollService.updateUserDB(empId, employeePayrollDTO);

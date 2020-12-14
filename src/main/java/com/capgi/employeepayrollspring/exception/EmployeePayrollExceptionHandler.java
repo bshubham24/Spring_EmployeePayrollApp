@@ -1,6 +1,7 @@
 package com.capgi.employeepayrollspring.exception;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,12 @@ public class EmployeePayrollExceptionHandler {
 		List<String> errMesg = errorList.stream().map(objErr -> objErr.getDefaultMessage())
 				.collect(Collectors.toList());
 		ResponseDTO responseDTO = new ResponseDTO("Exception while processing REST Request", errMesg);
+		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(NoSuchElementException.class)
+	public ResponseEntity<ResponseDTO> handleNoSuchElementException(NoSuchElementException exception) {
+		ResponseDTO responseDTO = new ResponseDTO("Employee doesn't exit!");
 		return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.BAD_REQUEST);
 	}
 

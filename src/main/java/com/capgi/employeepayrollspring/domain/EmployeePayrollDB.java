@@ -12,6 +12,9 @@ import javax.persistence.Table;
 import com.capgi.employeepayrollspring.dto.EmployeePayrollDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "emp_data")
 public class EmployeePayrollDB implements Serializable {
@@ -27,6 +30,7 @@ public class EmployeePayrollDB implements Serializable {
 	private String department;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date startDate;
+	private String profilePic;
 	private String notes;
 
 	public String getGender() {
@@ -90,7 +94,7 @@ public class EmployeePayrollDB implements Serializable {
 	}
 
 	public EmployeePayrollDB(Long id, String name, Long salary, String gender, String department, Date startDate,
-			String notes) {
+			String profilePic, String notes) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -98,6 +102,7 @@ public class EmployeePayrollDB implements Serializable {
 		this.gender = gender;
 		this.department = department;
 		this.startDate = startDate;
+		this.profilePic = profilePic;
 		this.notes = notes;
 	}
 
@@ -107,6 +112,7 @@ public class EmployeePayrollDB implements Serializable {
 		this.department = employeePayrollDTO.getDepartment();
 		this.gender = employeePayrollDTO.getGender();
 		this.startDate = employeePayrollDTO.getStartDate();
+		this.profilePic = employeePayrollDTO.getProfilePic();
 		this.notes = employeePayrollDTO.getNotes();
 	}
 
