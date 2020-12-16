@@ -91,8 +91,8 @@ public class EmployeePayrollService implements IEmployeePayrollService {
 			if (Objects.nonNull(empPayrollDTO.getSalary())) {
 				employeePayrollDB.setSalary(empPayrollDTO.getSalary());
 			}
-			if (Objects.nonNull(empPayrollDTO.getDepartment())) {
-				employeePayrollDB.setDepartment(empPayrollDTO.getDepartment());
+			if (Objects.nonNull(empPayrollDTO.getDepartments())) {
+				employeePayrollDB.setDepartments(empPayrollDTO.getDepartments());
 			}
 			if (Objects.nonNull(empPayrollDTO.getGender())) {
 				employeePayrollDB.setGender(empPayrollDTO.getGender());
