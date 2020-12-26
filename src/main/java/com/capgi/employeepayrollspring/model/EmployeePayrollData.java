@@ -1,50 +1,55 @@
 package com.capgi.employeepayrollspring.model;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
+
 import com.capgi.employeepayrollspring.dto.EmployeePayrollDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name = "emp_data")
 public class EmployeePayrollData {
-	private int employeeId;
-	private String name;
-	private long salary;
 
-	public EmployeePayrollData(int employeeId, String name, long salary) {
-		super();
-		this.employeeId = employeeId;
-		this.name = name;
-		this.salary = salary;
-	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	private String name;
+	private Long salary;
+	private String gender;
+	@JsonFormat(pattern = "dd MMM yyyy")
+	private LocalDate startDate;
+	private String profilePic;
+	private String notes;
+	@ElementCollection
+	@CollectionTable(name = "employee_department", joinColumns = @JoinColumn(name = "id"))
+	@Column(name = "department")
+	private List<String> departments;
 
 	public EmployeePayrollData() {
+
 	}
 
-	public EmployeePayrollData(int empId, EmployeePayrollDTO empPayrollDTO) {
-		this.setEmployeeId(empId);
-		this.setName(empPayrollDTO.name);
-		this.setSalary(empPayrollDTO.salary);
-	}
-
-	public int getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public long getSalary() {
-		return salary;
-	}
-
-	public void setSalary(long salary) {
-		this.salary = salary;
+	public EmployeePayrollData(EmployeePayrollDTO employeePayrollDTO) {
+		this.name = employeePayrollDTO.getName();
+		this.salary = employeePayrollDTO.getSalary();
+		this.departments = employeePayrollDTO.getDepartments();
+		this.gender = employeePayrollDTO.getGender();
+		this.startDate = employeePayrollDTO.getStartDate();
+		this.profilePic = employeePayrollDTO.getProfilePic();
+		this.notes = employeePayrollDTO.getNotes();
 	}
 
 }
