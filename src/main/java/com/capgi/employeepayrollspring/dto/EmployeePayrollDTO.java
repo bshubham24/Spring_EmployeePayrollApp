@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Pattern;
 
-import com.capgi.employeepayrollspring.domain.EmployeePayrollDB;
+import com.capgi.employeepayrollspring.model.EmployeePayrollData;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
@@ -48,7 +48,7 @@ public class EmployeePayrollDTO {
 		this.salary = salary;
 	}
 
-	public EmployeePayrollDTO(EmployeePayrollDB user) {
+	public EmployeePayrollDTO(EmployeePayrollData user) {
 		this.id = user.getId();
 		this.name = user.getName();
 		this.salary = user.getSalary();
